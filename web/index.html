@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>monosoec-yuu MVP</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700&display=swap"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <h1 class="logo">monosoec-yuu</h1>
+        <nav class="nav">
+          <a href="#" class="nav-item active">プロジェクト</a>
+          <a href="#" class="nav-item">ジョブ</a>
+          <a href="#" class="nav-item">設定</a>
+        </nav>
+        <div class="sidebar-footer">
+          <span class="label">組織</span>
+          <div class="pill">Acme Corp</div>
+        </div>
+      </aside>
+
+      <main class="content">
+        <header class="page-header">
+          <div>
+            <h2>プロジェクト Alpha</h2>
+            <p class="muted">根拠情報に基づく社内向け動画の作成。</p>
+          </div>
+          <button class="primary" id="new-job">新規ジョブ</button>
+        </header>
+
+        <section class="card-grid" id="job-list">
+          <article class="card selected" data-job-id="job-1">
+            <div class="card-title">セキュリティオンボーディング</div>
+            <p class="muted">承認待ち · 7 スライド</p>
+          </article>
+          <article class="card" data-job-id="job-2">
+            <div class="card-title">人事コンプライアンス</div>
+            <p class="muted">スライド生成中 · 4 スライド</p>
+          </article>
+          <article class="card" data-job-id="job-3">
+            <div class="card-title">プロダクトチュートリアル</div>
+            <p class="muted">キュー待ち · 10 スライド</p>
+          </article>
+        </section>
+
+        <section class="page-section">
+          <h3>ジョブ詳細</h3>
+          <div class="job-block">
+            <div>
+              <div class="label">タイトル</div>
+              <div id="job-title">セキュリティオンボーディング</div>
+            </div>
+            <div>
+              <div class="label">パイプライン</div>
+              <div class="progress" id="job-progress">
+                <span class="dot active"></span>
+                <span class="dot active"></span>
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <p class="note muted">※ この画面はUIモックです（API未接続）。</p>
+      </main>
+
+      <aside class="meta">
+        <div class="meta-card">
+          <h4>ステータス</h4>
+          <p class="pill" id="job-status">承認待ち</p>
+        </div>
+        <div class="meta-card">
+          <h4>進捗</h4>
+          <p id="job-progress-text">3 / 8 ステップ</p>
+        </div>
+        <div class="meta-card">
+          <h4>クレジット使用量</h4>
+          <p id="job-credits">42 分 · 120 クレジット</p>
+        </div>
+        <div class="meta-card">
+          <h4>承認者</h4>
+          <p id="job-approver">佐藤 祐子</p>
+        </div>
+        <div class="meta-card">
+          <h4>ログ</h4>
+          <ul id="job-logs">
+            <li>キュー → 入力検証</li>
+            <li>構成案の生成</li>
+            <li>台本の生成</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
