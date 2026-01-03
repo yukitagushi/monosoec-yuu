@@ -15,8 +15,8 @@
       <aside class="sidebar">
         <h1 class="logo">monosoec-yuu</h1>
         <nav class="nav">
-          <a href="#" class="nav-item active">プロジェクト</a>
-          <a href="#" class="nav-item">ジョブ</a>
+          <a href="#" class="nav-item active">ジョブ</a>
+          <a href="#" class="nav-item">プロジェクト</a>
           <a href="#" class="nav-item">設定</a>
         </nav>
         <div class="sidebar-footer">
@@ -28,19 +28,13 @@
       <main class="content">
         <header class="page-header">
           <div>
-            <h2 id="project-title">プロジェクト</h2>
-            <p class="muted" id="project-note">プロジェクトを選択してください。</p>
+            <h2>生成ジョブ</h2>
+            <p class="muted">ジョブを作成し、レンダリングを開始します。</p>
           </div>
           <div class="header-actions">
-            <button class="secondary" id="new-project">新規プロジェクト</button>
             <button class="primary" id="new-job">新規ジョブ</button>
           </div>
         </header>
-
-        <section class="page-section">
-          <h3>プロジェクト一覧</h3>
-          <div class="card-grid" id="project-list"></div>
-        </section>
 
         <section class="page-section">
           <h3>ジョブ一覧</h3>
@@ -61,43 +55,14 @@
               <div id="job-duration">-</div>
             </div>
             <div>
-              <div class="label">パイプライン</div>
+              <div class="label">進捗</div>
               <div class="progress" id="job-progress"></div>
+              <button class="primary" id="render-job">レンダリング開始</button>
             </div>
-          </div>
-
-          <div class="form-grid">
-            <div>
-              <h4>入力ファイル</h4>
-              <form id="upload-form">
-                <label class="field">
-                  <span>slides.pdf</span>
-                  <input type="file" id="slides-file" accept="application/pdf" />
-                </label>
-                <label class="field">
-                  <span>audio.zip</span>
-                  <input type="file" id="audio-file" accept="application/zip" />
-                </label>
-                <button class="primary" type="submit">アップロード & レンダー</button>
-              </form>
-            </div>
-            <div>
-              <h4>承認</h4>
-              <div class="button-row">
-                <button class="primary" id="approve-job">承認</button>
-                <button class="secondary" id="reject-job">差戻し</button>
-              </div>
-              <div id="review-history" class="muted"></div>
-            </div>
-          </div>
-
-          <div class="page-section">
-            <h4>成果物</h4>
-            <ul id="artifact-list" class="list"></ul>
           </div>
         </section>
 
-        <p class="note muted">※ ローカルAPI接続のMVPデモです。</p>
+        <p class="note muted">※ ローカルMVP: /jobs 作成・一覧・レンダリングを確認できます。</p>
       </main>
 
       <aside class="meta">
@@ -108,10 +73,6 @@
         <div class="meta-card">
           <h4>進捗</h4>
           <p id="job-progress-text">-</p>
-        </div>
-        <div class="meta-card">
-          <h4>クレジット使用量</h4>
-          <p id="job-credits">-</p>
         </div>
         <div class="meta-card">
           <h4>ログ</h4>

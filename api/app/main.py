@@ -36,7 +36,7 @@ STORE = SqliteStore(DATA_DIR / "store.db")
 app = FastAPI(title="monosoec-yuu API", version="0.2.0")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://localhost:5173"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -143,6 +143,20 @@ def _log(job_id: uuid.UUID, action: str, detail: str) -> None:
             created_at=datetime.utcnow(),
         )
     )
+
+
+def _get_default_project() -> ProjectRecord:
+    projects = list(STORE.list_projects())
+    if projects:
+        return projects[0]
+    record = ProjectRecord(
+        id=uuid.uuid4(),
+        title="デフォルトプロジェクト",
+        reference_note="",
+        created_at=datetime.utcnow(),
+    )
+    STORE.create_project(record)
+    return record
 
 
 def _ensure_directories(job_id: uuid.UUID) -> tuple[Path, Path, Path]:
@@ -443,3 +457,46 @@ def download_artifact(job_id: uuid.UUID, artifact_id: uuid.UUID) -> FileResponse
     if not path.exists():
         raise HTTPException(status_code=404, detail="file not found")
     return FileResponse(path)
+
+
+@app.post("/jobs", response_model=JobResponse)
+def create_job_simple(payload: JobCreate) -> JobResponse:
+    project = _get_default_project()
+    job_id = uuid.uuid4()
+    now = datetime.utcnow()
+    job = JobRecord(
+        id=job_id,
+        project_id=project.id,
+        title=payload.title,
+        purpose=payload.purpose,
+        tone=payload.tone,
+        target_duration_seconds=payload.target_duration_seconds,
+        status=JobStatus.QUEUED,
+        progress_percent=progress_for_status(JobStatus.QUEUED),
+        output_duration_seconds=None,
+        created_at=now,
+        updated_at=now,
+    )
+    STORE.create_job(job)
+    _log(job_id, "job.create", "ジョブを作成")
+    return _job_to_response(job)
+
+
+@app.get("/jobs", response_model=list[JobResponse])
+def list_jobs_simple() -> list[JobResponse]:
+    return [_job_to_response(job) for job in STORE.list_all_jobs()]
+
+
+@app.post("/jobs/{job_id}/render", response_model=JobResponse)
+def render_job(job_id: uuid.UUID) -> JobResponse:
+    job = STORE.get_job(job_id)
+    if not job:
+        raise HTTPException(status_code=404, detail="job not found")
+
+    thread = threading.Thread(target=_run_render, args=(job_id,), daemon=True)
+    thread.start()
+    _log(job_id, "render.request", "レンダリングを開始")
+    updated = STORE.get_job(job_id)
+    if not updated:
+        raise HTTPException(status_code=404, detail="job not found")
+    return _job_to_response(updated)

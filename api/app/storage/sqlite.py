@@ -222,6 +222,11 @@ class SqliteStore:
         for row in rows:
             yield self._row_to_job(row)
 
+    def list_all_jobs(self) -> Iterable[JobRecord]:
+        rows = self._conn.execute("SELECT * FROM jobs ORDER BY created_at DESC")
+        for row in rows:
+            yield self._row_to_job(row)
+
     def get_job(self, job_id: UUID) -> Optional[JobRecord]:
         row = self._conn.execute(
             "SELECT * FROM jobs WHERE id = ?",
