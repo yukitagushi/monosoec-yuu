@@ -1,0 +1,162 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", "Noto Sans JP", sans-serif;
+  color: #1f1f1f;
+  background: #f7f7f5;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 220px 1fr 260px;
+  min-height: 100vh;
+  gap: 20px;
+  padding: 20px;
+}
+
+.sidebar,
+.meta {
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.content {
+  background: #ffffff;
+  border: 1px solid #e6e6e6;
+  border-radius: 14px;
+  padding: 24px;
+}
+
+.logo {
+  font-size: 18px;
+  margin-bottom: 24px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: #4b4b4b;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+.nav-item.active {
+  background: #f1f1ee;
+  color: #111111;
+  font-weight: 600;
+}
+
+.sidebar-footer {
+  margin-top: 40px;
+}
+
+.label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #8b8b86;
+  margin-bottom: 6px;
+}
+
+.pill {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #f2f2ef;
+  font-size: 12px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.primary {
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid #dadada;
+  background: #ffffff;
+}
+
+.muted {
+  color: #7a7a72;
+  font-size: 14px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.card {
+  border: 1px solid #e8e8e3;
+  border-radius: 12px;
+  padding: 14px;
+  background: #fafaf8;
+}
+
+.card-title {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.page-section {
+  margin-top: 28px;
+}
+
+.job-block {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ecece6;
+  border-radius: 12px;
+  padding: 16px;
+  background: #ffffff;
+}
+
+.progress {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e3e3dd;
+}
+
+.dot.active {
+  background: #6b6b64;
+}
+
+.meta-card {
+  border-bottom: 1px solid #f0f0ec;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+.meta-card:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.meta-card ul {
+  margin: 8px 0 0;
+  padding-left: 16px;
+  color: #6f6f68;
+  font-size: 13px;
+}
