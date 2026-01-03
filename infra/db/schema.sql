@@ -3,15 +3,10 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TYPE job_status AS ENUM (
   'queued',
-  'running_validation',
-  'running_outline',
-  'running_script',
-  'running_slides',
-  'running_tts',
   'running_render',
-  'running_quality_check',
-  'awaiting_approval',
+  'needs_review',
   'approved',
+  'rejected',
   'failed'
 );
 
@@ -33,8 +28,8 @@ CREATE TABLE users (
 CREATE TABLE projects (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   organization_id UUID NOT NULL REFERENCES organizations(id),
-  name TEXT NOT NULL,
-  description TEXT,
+  title TEXT NOT NULL,
+  reference_note TEXT,
   created_by UUID NOT NULL REFERENCES users(id),
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
@@ -46,10 +41,10 @@ CREATE TABLE jobs (
   requested_by UUID NOT NULL REFERENCES users(id),
   approver_id UUID REFERENCES users(id),
   title TEXT NOT NULL,
-  input_summary TEXT NOT NULL,
-  reference_sources JSONB NOT NULL DEFAULT '[]'::jsonb,
-  progress_current INTEGER NOT NULL DEFAULT 0,
-  progress_total INTEGER NOT NULL DEFAULT 8,
+  purpose TEXT NOT NULL,
+  tone TEXT NOT NULL,
+  target_duration_seconds INTEGER NOT NULL,
+  progress_percent INTEGER NOT NULL DEFAULT 0,
   output_duration_seconds INTEGER,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
@@ -64,6 +59,15 @@ CREATE TABLE job_artifacts (
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+CREATE TABLE job_reviews (
+  id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+  job_id UUID NOT NULL REFERENCES jobs(id),
+  reviewer_id UUID NOT NULL REFERENCES users(id),
+  decision TEXT NOT NULL,
+  comment TEXT,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
 CREATE TABLE audit_logs (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   organization_id UUID NOT NULL REFERENCES organizations(id),
@@ -75,11 +79,10 @@ CREATE TABLE audit_logs (
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
-CREATE TABLE billing_ledger (
+CREATE TABLE billing_usage (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   organization_id UUID NOT NULL REFERENCES organizations(id),
   job_id UUID REFERENCES jobs(id),
-  amount INTEGER NOT NULL,
-  unit TEXT NOT NULL,
+  duration_seconds INTEGER NOT NULL,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );

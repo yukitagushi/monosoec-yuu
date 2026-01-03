@@ -28,25 +28,23 @@
       <main class="content">
         <header class="page-header">
           <div>
-            <h2>プロジェクト Alpha</h2>
-            <p class="muted">根拠情報に基づく社内向け動画の作成。</p>
+            <h2 id="project-title">プロジェクト</h2>
+            <p class="muted" id="project-note">プロジェクトを選択してください。</p>
           </div>
-          <button class="primary" id="new-job">新規ジョブ</button>
+          <div class="header-actions">
+            <button class="secondary" id="new-project">新規プロジェクト</button>
+            <button class="primary" id="new-job">新規ジョブ</button>
+          </div>
         </header>
 
-        <section class="card-grid" id="job-list">
-          <article class="card selected" data-job-id="job-1">
-            <div class="card-title">セキュリティオンボーディング</div>
-            <p class="muted">承認待ち · 7 スライド</p>
-          </article>
-          <article class="card" data-job-id="job-2">
-            <div class="card-title">人事コンプライアンス</div>
-            <p class="muted">スライド生成中 · 4 スライド</p>
-          </article>
-          <article class="card" data-job-id="job-3">
-            <div class="card-title">プロダクトチュートリアル</div>
-            <p class="muted">キュー待ち · 10 スライド</p>
-          </article>
+        <section class="page-section">
+          <h3>プロジェクト一覧</h3>
+          <div class="card-grid" id="project-list"></div>
+        </section>
+
+        <section class="page-section">
+          <h3>ジョブ一覧</h3>
+          <div class="card-grid" id="job-list"></div>
         </section>
 
         <section class="page-section">
@@ -54,51 +52,70 @@
           <div class="job-block">
             <div>
               <div class="label">タイトル</div>
-              <div id="job-title">セキュリティオンボーディング</div>
+              <div id="job-title">-</div>
+              <div class="label">目的</div>
+              <div id="job-purpose">-</div>
+              <div class="label">口調</div>
+              <div id="job-tone">-</div>
+              <div class="label">目標尺</div>
+              <div id="job-duration">-</div>
             </div>
             <div>
               <div class="label">パイプライン</div>
-              <div class="progress" id="job-progress">
-                <span class="dot active"></span>
-                <span class="dot active"></span>
-                <span class="dot active"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-              </div>
+              <div class="progress" id="job-progress"></div>
             </div>
+          </div>
+
+          <div class="form-grid">
+            <div>
+              <h4>入力ファイル</h4>
+              <form id="upload-form">
+                <label class="field">
+                  <span>slides.pdf</span>
+                  <input type="file" id="slides-file" accept="application/pdf" />
+                </label>
+                <label class="field">
+                  <span>audio.zip</span>
+                  <input type="file" id="audio-file" accept="application/zip" />
+                </label>
+                <button class="primary" type="submit">アップロード & レンダー</button>
+              </form>
+            </div>
+            <div>
+              <h4>承認</h4>
+              <div class="button-row">
+                <button class="primary" id="approve-job">承認</button>
+                <button class="secondary" id="reject-job">差戻し</button>
+              </div>
+              <div id="review-history" class="muted"></div>
+            </div>
+          </div>
+
+          <div class="page-section">
+            <h4>成果物</h4>
+            <ul id="artifact-list" class="list"></ul>
           </div>
         </section>
 
-        <p class="note muted">※ この画面はUIモックです（API未接続）。</p>
+        <p class="note muted">※ ローカルAPI接続のMVPデモです。</p>
       </main>
 
       <aside class="meta">
         <div class="meta-card">
           <h4>ステータス</h4>
-          <p class="pill" id="job-status">承認待ち</p>
+          <p class="pill" id="job-status">-</p>
         </div>
         <div class="meta-card">
           <h4>進捗</h4>
-          <p id="job-progress-text">3 / 8 ステップ</p>
+          <p id="job-progress-text">-</p>
         </div>
         <div class="meta-card">
           <h4>クレジット使用量</h4>
-          <p id="job-credits">42 分 · 120 クレジット</p>
-        </div>
-        <div class="meta-card">
-          <h4>承認者</h4>
-          <p id="job-approver">佐藤 祐子</p>
+          <p id="job-credits">-</p>
         </div>
         <div class="meta-card">
           <h4>ログ</h4>
-          <ul id="job-logs">
-            <li>キュー → 入力検証</li>
-            <li>構成案の生成</li>
-            <li>台本の生成</li>
-          </ul>
+          <ul id="job-logs"></ul>
         </div>
       </aside>
     </div>

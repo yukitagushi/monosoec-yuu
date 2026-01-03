@@ -83,11 +83,23 @@ body {
   margin-bottom: 24px;
 }
 
+.header-actions {
+  display: flex;
+  gap: 10px;
+}
+
 .primary {
   padding: 8px 14px;
   border-radius: 10px;
   border: 1px solid #dadada;
   background: #ffffff;
+}
+
+.secondary {
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid #dadada;
+  background: #f7f7f3;
 }
 
 .muted {
@@ -126,6 +138,56 @@ body {
 
 .note {
   margin-top: 18px;
+}
+
+.form-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  color: #5f5f58;
+  margin-bottom: 12px;
+}
+
+.field input[type="file"] {
+  border: 1px solid #e0e0d8;
+  border-radius: 8px;
+  padding: 6px;
+  background: #ffffff;
+}
+
+.button-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list li {
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0ec;
+  font-size: 14px;
+}
+
+.list a {
+  color: #2f2f2a;
+  text-decoration: none;
+}
+
+.list a:hover {
+  text-decoration: underline;
 }
 
 .job-block {
