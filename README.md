@@ -34,3 +34,8 @@ python3 -m http.server 5173
 3. ジョブ詳細で `slides.pdf` と `audio.zip` をアップロード
 4. レンダリング完了後、成果物（mp4）をダウンロード
 5. 承認 or 差戻しでレビュー履歴を確認
+
+## Vercelデプロイ確認
+- UI: `https://<your-vercel-domain>/`
+- API: `https://<your-vercel-domain>/api/docs`
+- ヘルスチェック: `https://<your-vercel-domain>/api/health`

@@ -273,7 +273,7 @@ def _run_render(job_id: uuid.UUID) -> None:
 
 @app.get("/health")
 def health() -> dict:
-    return {"status": "ok"}
+    return {"ok": True}
 
 
 @app.post("/projects", response_model=ProjectResponse)
